@@ -5,6 +5,7 @@ class App extends React.Component {
     display: 0,
     operand: null,
     temp1: null,
+    temp2: null,
     equals: false
   }
 
@@ -13,31 +14,75 @@ class App extends React.Component {
       display: 0,
       operand: null,
       temp1: null,
+      temp2: null,
       equals: false
     })
   }
 
   operand = e => {
-    if (this.state.equals === true) {
-      this.setState({
-        temp1: this.state.display,
-        display: 0,
-        operand: e.target.value,
-        equals: false
-      })
+    if (this.state.operand === null) {
+      if (e.target.value === '+') {
+        this.setState({
+          temp1: this.state.display,
+          operand: e.target.value,
+          equals: true
+        })
+      }
+
+      else if (e.target.value === '-') {
+        this.setState({
+          temp1: this.state.display,
+          operand: e.target.value,
+          equals: true
+        })
+      }
+
+      else if (e.target.value === '*') {
+        this.setState({
+          temp1: this.state.display,
+          operand: e.target.value,
+          equals: true
+        })
+      }
+
+      else if (e.target.value === '/') {
+        this.setState({
+          temp1: this.state.display,
+          operand: e.target.value,
+          equals: true
+        })
+      }
     }
 
-    else if (this.state.equals === false) {
-      if (parseInt(this.state.display) === 0) {
+    else {
+      if (this.state.operand === '+') {
         this.setState({
+          display: parseFloat(this.state.temp1) + parseFloat(this.state.display),
+          equals: true,
           operand: e.target.value
         })
       }
 
-      else {
+      else if (this.state.operand === '-') {
         this.setState({
-          temp1: this.state.display,
-          display: 0,
+          display: parseFloat(this.state.temp1) - parseFloat(this.state.display),
+          equals: true,
+          operand: e.target.value
+        })
+      }
+
+      else if (this.state.operand === '*') {
+        this.setState({
+          display: parseFloat(this.state.temp1) * parseFloat(this.state.display),
+          equals: true,
+          operand: e.target.value
+        })
+      }
+
+      else if (this.state.operand === '/') {
+        this.setState({
+          display: Math.round((parseFloat(this.state.temp1) / parseFloat(this.state.display)) * 10000) / 10000,
+          equals: true,
           operand: e.target.value
         })
       }
@@ -45,42 +90,94 @@ class App extends React.Component {
   }
 
   click = e => {
-    if (parseInt(this.state.display) === 0) {
-      this.setState({
-        display: e.target.value
-      })
-    }
-
-    else if (parseInt(this.state.display) === 0 && e.target.value === '.') {
-      this.setState({
-        display: this.state.display + e.target.value
-      })
-    }
-
-    else if (e.target.value === '.') {
-      let decimal = false
-
-      for (let i of this.state.display) {
-        if (i === '.') {
-          decimal = true
-        }
+    if (this.state.operand === null) {
+      if (parseInt(this.state.display) === 0) {
+        this.setState({
+          display: e.target.value
+        })
       }
-
-      if (decimal === false) {
+  
+      else if (parseInt(this.state.display) === 0 && e.target.value === '.') {
         this.setState({
           display: this.state.display + e.target.value
         })
       }
-
+  
+      else if (e.target.value === '.') {
+        let decimal = false
+  
+        for (let i of this.state.display) {
+          if (i === '.') {
+            decimal = true
+          }
+        }
+  
+        if (decimal === false) {
+          this.setState({
+            display: this.state.display + e.target.value
+          })
+        }
+  
+        else {
+          console.log('decimal already present')
+        }
+      }
+  
       else {
-        console.log('decimal already present')
+        this.setState({
+          display: this.state.display + e.target.value
+        })
       }
     }
 
     else {
-      this.setState({
-        display: this.state.display + e.target.value
-      })
+      if (this.state.equals === true) {
+        this.setState({
+          temp1: this.state.display,
+          display: e.target.value,
+          equals: false
+        })
+      }
+
+       else {
+        if (parseInt(this.state.display) === 0) {
+          this.setState({
+            display: e.target.value
+          })
+        }
+    
+        else if (parseInt(this.state.display) === 0 && e.target.value === '.') {
+          this.setState({
+            display: this.state.display + e.target.value
+          })
+        }
+    
+        else if (e.target.value === '.') {
+          let decimal = false
+    
+          for (let i of this.state.display) {
+            if (i === '.') {
+              decimal = true
+            }
+          }
+    
+          if (decimal === false) {
+            this.setState({
+              display: this.state.display + e.target.value
+            })
+          }
+    
+          else {
+            console.log('decimal already present')
+          }
+        }
+    
+        else {
+          this.setState({
+            display: this.state.display + e.target.value
+          })
+        }
+       }
     }
   }
 
@@ -88,29 +185,37 @@ class App extends React.Component {
     if (this.state.operand === '+') {
       this.setState({
         display: parseFloat(this.state.temp1) + parseFloat(this.state.display),
-        equals: true
+        equals: true,
+        operand: null
       })
     }
 
     if (this.state.operand === '-') {
       this.setState({
         display: parseFloat(this.state.temp1) - parseFloat(this.state.display),
-        equals: true
+        equals: true,
+        operand: null
       })
     }
 
     if (this.state.operand === '*') {
       this.setState({
         display: parseFloat(this.state.temp1) * parseFloat(this.state.display),
-        equals: true
+        equals: true,
+        operand: null
       })
     }
 
     if (this.state.operand === '/') {
       this.setState({
         display: Math.round((parseFloat(this.state.temp1) / parseFloat(this.state.display)) * 10000) / 10000,
-        equals: true
+        equals: true,
+        operand: null
       })
+    }
+
+    if (this.state.operand === null) {
+      console.log('no operand')
     }
   }
 
