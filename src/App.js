@@ -130,7 +130,7 @@ class App extends React.Component {
       }
     }
 
-    else {
+    else if (this.state.equals ===  true) {
       if (this.state.equals === true) {
         this.setState({
           temp1: this.state.display,
@@ -215,7 +215,9 @@ class App extends React.Component {
     }
 
     if (this.state.operand === null) {
-      console.log('no operand')
+      this.setState({
+        equals: true
+      })
     }
   }
 
