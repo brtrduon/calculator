@@ -224,33 +224,52 @@ class App extends React.Component {
   render() {
     return (
       <div className='container'>
-        <div id='display'>
-          {this.state.display}
+        <div className='row'>
+          <div className='col-sm-2'>
+            <div className='input-group mb-2'>
+              <div id='display' className='form-control form-control-sm'>
+                {this.state.display}
+              </div>
+            </div>
+          </div>
         </div>
         <div className='row'>
-          <button id='seven' onClick={this.click} value={7}>7</button>
-          <button id='eight' onClick={this.click} value={8}>8</button>
-          <button id='nine' onClick={this.click} value={9}>9</button>
-          <button id='multiply' onClick={this.operand} value='*'>*</button>
+          <div className='col-sm-3'>
+            <button id='seven' type='button' className='btn btn-lg btn-outline-info' onClick={this.click} value={7}>7</button>
+            <button id='eight' type='button' className='btn btn-lg btn-outline-info' onClick={this.click} value={8}>8</button>
+            <button id='nine' type='button' className='btn btn-lg btn-outline-info' onClick={this.click} value={9}>9</button>
+            <button id='multiply' type='button' className='btn btn-lg btn-outline-secondary' onClick={this.operand} value='*'>*</button>
+          </div>
         </div>
         <div className='row'>
-          <button id='four' onClick={this.click} value={4}>4</button>
-          <button id='five' onClick={this.click} value={5}>5</button>
-          <button id='six' onClick={this.click} value={6}>6</button>
-          <button id='subtract' onClick={this.operand} value='-'>-</button>
+          <div className='col-sm-3'>
+            <button id='four' type='button' className='btn btn-lg btn-outline-info' onClick={this.click} value={4}>4</button>
+            <button id='five' type='button' className='btn btn-lg btn-outline-info' onClick={this.click} value={5}>5</button>
+            <button id='six' type='button' className='btn btn-lg btn-outline-info' onClick={this.click} value={6}>6</button>
+            <button id='subtract' type='button' className='btn btn-lg btn-outline-secondary' onClick={this.operand} value='-'>-</button>
+          </div>
         </div>
         <div className='row'>
-          <button id='one' onClick={this.click} value={1}>1</button>
-          <button id='two' onClick={this.click} value={2}>2</button>
-          <button id='three' onClick={this.click} value={3}>3</button>
-          <button id='add' onClick={this.operand} value='+'>+</button>
+          <div className='col-sm-3'>
+            <button id='one' type='button' className='btn btn-lg btn-outline-info' onClick={this.click} value={1}>1</button>
+            <button id='two' type='button' className='btn btn-lg btn-outline-info' onClick={this.click} value={2}>2</button>
+            <button id='three' type='button' className='btn btn-lg btn-outline-info' onClick={this.click} value={3}>3</button>
+            <button id='add' type='button' className='btn btn-lg btn-outline-secondary' onClick={this.operand} value='+'>+</button>
+          </div>
         </div>
-        
-        <button id='clear' onClick={this.clear}>CE</button>
-        <button id='divide' onClick={this.operand} value='/'>/</button>
-        <button id='equals' onClick={this.equals}>=</button>
-        <button id='zero' onClick={this.click} value={0}>0</button>
-        <button id='decimal' onClick={this.click} value='.'>.</button>
+        <div className='row'>
+          <div className='col-sm-3'>
+            <button id='zero' type='button' className='btn btn-lg btn-outline-info' onClick={this.click} value={0}>0</button>
+            <button id='decimal' type='button' className='btn btn-lg btn-outline-secondary' onClick={this.click} value='.'>.</button>
+            <button id='divide' type='button' className='btn btn-lg btn-outline-secondary' onClick={this.operand} value='/'>/</button>
+            <button id='equals' type='button' className='btn btn-lg btn-outline-success' onClick={this.equals}>=</button>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-sm-3'>
+            <button id='clear' type='button' className='btn btn-outline-danger' onClick={this.clear}>CE</button>
+          </div>
+        </div>
       </div>
     )
   }
